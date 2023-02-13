@@ -12,6 +12,7 @@ root.geometry('900x600+200+80')
 root.config(bg='#082A46')
 
 def drawData(data):
+    canvas.delete("all")
     canvas_height = 450
     canvas_width = 870
     x_width = canvas_width / (len(data) + 1)
@@ -33,7 +34,43 @@ def drawData(data):
 
 def Generate():
     print('Selected Algorithm: ' + selected_algorithm.get())
-    data = [55, 13, 11, 88, 63, 17, 29, 94, 5, 92]
+
+    # we will take values from our speed scale now
+    
+    try :
+        minivalue = int(minvalue.get())
+    except: # if value is wrong we will keep by default as 1
+        minivalue = 1
+        
+    try :
+        maxivalue = int(maxvalue.get())
+    except: # if value is wrong we will keep by default as 100
+        maxivalue = 100
+
+    try :
+        sizeevalue = int(sizevalue.get())
+    except: # if value is wrong we will keep by default as 10
+        sizeevalue = 10
+        
+    if minivalue < 0:
+        minivalue = 0
+    if maxivalue > 100:
+        maxivalue = 100
+    if sizeevalue > 40 or sizeevalue < 3:
+        sizeevalue = 29
+        
+    # if in case max value is smaller than min value we will swap data
+    
+    if minivalue > maxivalue:
+        minivalue, maxivalue = maxivalue, minivalue
+        
+        
+
+
+    data = []
+    for _ in range(sizeevalue):
+        # we will add that speed scaled by appending it 
+        data.append(random.randrange(minivalue, maxivalue+1))
     drawData(data)
 
 
