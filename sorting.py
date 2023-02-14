@@ -10,6 +10,7 @@ root = Tk()
 root.title('Sorting Algorithm Visualiser')
 root.geometry('900x600+200+80')
 root.config(bg='#082A46')
+data = []
 
 def drawData(data):
     canvas.delete("all")
@@ -31,42 +32,22 @@ def drawData(data):
         canvas.create_text(x0+2, y0, anchor = SW, text = str(data[i]), font = ("new roman", 10, "italic bold"),
                            fill = "orange")
 
+def StartAlgorithm():
+    global data
+    timeTick = set_speed()
+    if algo_menu.get() == 'Bubble Sort':
+        bubble_sort(data, drawData, timeTick)
+
+
 
 def Generate():
+    global data
     print('Selected Algorithm: ' + selected_algorithm.get())
-
-    # we will take values from our speed scale now
+    minivalue = int(minvalue.get())
+    maxivalue = int(maxvalue.get())
+    sizeevalue = int(sizevalue.get())
     
-    try :
-        minivalue = int(minvalue.get())
-    except: # if value is wrong we will keep by default as 1
-        minivalue = 1
-        
-    try :
-        maxivalue = int(maxvalue.get())
-    except: # if value is wrong we will keep by default as 100
-        maxivalue = 100
-
-    try :
-        sizeevalue = int(sizevalue.get())
-    except: # if value is wrong we will keep by default as 10
-        sizeevalue = 10
-        
-    if minivalue < 0:
-        minivalue = 0
-    if maxivalue > 100:
-        maxivalue = 100
-    if sizeevalue > 40 or sizeevalue < 3:
-        sizeevalue = 29
-        
-    # if in case max value is smaller than min value we will swap data
     
-    if minivalue > maxivalue:
-        minivalue, maxivalue = maxivalue, minivalue
-        
-        
-
-
     data = []
     for _ in range(sizeevalue):
         # we will add that speed scaled by appending it 
@@ -118,14 +99,14 @@ maxvalue = Scale(root, from_ = 0, to = 100, resolution = 1, orient = HORIZONTAL,
 maxvalue.place(x = 620, y = 60)
 
 start = Button(root, text = "Start", bg = '#C45B09', font = ("arial", 12, "italic bold"), 
-        relief = SUNKEN, activebackground = 'green', activeforeground = "white", bd = 5, width = 10)
+        relief = SUNKEN, activebackground = 'green', activeforeground = "white", bd = 5, width = 10, command = StartAlgorithm)
 start.place(x = 750, y = 0)
 
 speedlabel = Label(root, text = "Speed : ", font = ("new roman", 12, "italic bold"), bg = "#0E6DA5", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
 speedlabel.place(x = 400, y = 0)
 
-speedscale = Scale(root, from_ = 0.1, to = 5.0, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+speedscale = Scale(root, from_ = 0.1, to = 5.0, resolution = 0.2, length = 200, digits = 2, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
 speedscale.place(x = 520, y = 0)
 
