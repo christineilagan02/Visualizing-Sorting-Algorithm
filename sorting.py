@@ -6,6 +6,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from bubblesort import bubble_sort
+from quicksort import quick_sort
 
 root = Tk()
 root.title('Sorting Algorithm Visualiser')
@@ -36,7 +37,16 @@ def drawData(data, colorArray):
     root.update_idletasks()
 def StartAlgorithm():
     global data
-    bubble_sort(data, drawData, speedscale.get())
+    if not data:
+        return
+    
+    if(algo_menu.get() == 'Quick Sort'):
+        quick_sort(data, 0, len(data)-1, drawData, speedscale.get())
+        drawData(data, ['green' for x in range(len(data))])
+        
+    elif algo_menu.get() == "Bubble Sort":
+        bubble_sort(data, drawData, speedscale.get())
+    
 
 
 
