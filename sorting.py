@@ -38,20 +38,28 @@ def drawData(data, colorArray):
     root.update_idletasks()
 def StartAlgorithm():
     global data
+    timeTick = set_speed()
     if not data:
         return
     
     if(algo_menu.get() == 'Quick Sort'):
-        quick_sort(data, 0, len(data)-1, drawData, speedscale.get())
+        quick_sort(data, 0, len(data)-1, drawData, timeTick)
         
-    elif algo_menu.get() == "Bubble Sort":
-        bubble_sort(data, drawData, speedscale.get())
+    elif (algo_menu.get() == 'Merge Sort'):
+        merge_sort(data, 0, len(data)-1, drawData, timeTick)
     
-    elif algo_menu.get() == "Merge Sort":
-        merge_sort(data, drawData, speedscale.get())
+    elif algo_menu.get() == "Bubble Sort":
+        bubble_sort(data, drawData, timeTick)
     drawData(data, ['green' for x in range(len(data))])
 
-
+# This function will set sorting speed
+def set_speed():
+    if speed_menu.get() == 'Slow':
+        return 0.3
+    elif speed_menu.get() == 'Medium':
+        return 0.1
+    else:
+        return 0.001
 
 def Generate():
     global data
@@ -70,6 +78,7 @@ def Generate():
 
 
 selected_algorithm = StringVar()
+speed_name = StringVar()
 # label, buttons, speed scale
 
 mainlabel = Label(root, text = "Algorithm : ", font = ("new roman", 16, "italic bold"), bg = "violet", 
@@ -115,13 +124,15 @@ start = Button(root, text = "Start", bg = 'lightgreen', font = ("arial", 12, "it
         relief = SUNKEN, activebackground = 'green', activeforeground = "white", bd = 5, width = 10, command = StartAlgorithm)
 start.place(x = 750, y = 10)
 
-speedlabel = Label(root, text = "Speed : ", font = ("new roman", 12, "italic bold"), bg = "violet", 
-                  width = 10, fg = "black", height = 2, relief = GROOVE, bd = 3)
-speedlabel.place(x = 415, y = 10)
+# dropdown to select sorting speed 
+speedlabel = Label(root, text = "Sorting Speed: ", font = ("new roman", 16, "italic bold"), bg = "violet", 
+                  width = 13, fg = "black", relief = GROOVE, bd = 5)
+speedlabel.place(x = 430, y = 10)
 
-speedscale = Scale(root, from_ = 0.1, to = 5.0, resolution = 0.2, length = 200, digits = 2, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
-                  relief = GROOVE, bd = 1, width = 10)
-speedscale.place(x = 535, y = 10)
+speed_menu = ttk.Combobox(root, width = 7, font = ("new roman", 15, "italic bold"), textvariable = speed_name, 
+                         values = ['Fast', 'Medium', 'Slow'])
+speed_menu.place(x = 620, y = 10)
+speed_menu.current(1)     # by default medium
 
 canvas = Canvas(root, width = 870, height = 450, bg = "silver")
 canvas.place(x = 10, y = 130)

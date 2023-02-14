@@ -23,9 +23,6 @@ def merge(data, start, mid, end, drawData, timeTick):
     for p in range(len(tempArray)):
         data[start] = tempArray[p]
         start += 1
-        drawData(data, ['yellow' if x >= start and x < mid else 'orange' if x == mid 
-                else 'white' if x > mid and x <=end else 'gray' for x in range(len(data))])
-        time.sleep(timeTick)
 
 def merge_sort(data, start, end, drawData, timeTick):
     if start < end:
