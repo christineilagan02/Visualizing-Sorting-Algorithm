@@ -12,7 +12,7 @@ from mergesort import merge_sort
 root = Tk()
 root.title('Sorting Algorithm Visualiser')
 root.geometry('900x600+200+80')
-root.config(bg='#082A46')
+root.config(bg='lightblue')
 data = []
 
 def drawData(data, colorArray):
@@ -33,7 +33,7 @@ def drawData(data, colorArray):
         
         canvas.create_rectangle(x0, y0, x1, y1, fill = colorArray[i])
         canvas.create_text(x0+2, y0, anchor = SW, text = str(data[i]), font = ("new roman", 10, "italic bold"),
-                           fill = "orange")
+                           fill = "black")
 
     root.update_idletasks()
 def StartAlgorithm():
@@ -72,58 +72,58 @@ def Generate():
 selected_algorithm = StringVar()
 # label, buttons, speed scale
 
-mainlabel = Label(root, text = "Algorithm : ", font = ("new roman", 16, "italic bold"), bg = "#05897A", 
+mainlabel = Label(root, text = "Algorithm : ", font = ("new roman", 16, "italic bold"), bg = "violet", 
                   width = 10, fg = "black", relief = GROOVE, bd = 5)
-mainlabel.place(x = 0, y = 0)
+mainlabel.place(x = 20, y = 10)
 
 algo_menu = ttk.Combobox(root, width = 15, font = ("new roman", 19, "italic bold"), textvariable = selected_algorithm, 
                          values = ['Bubble Sort', 'Merge Sort', 'Quick Sort'])
-algo_menu.place(x = 145, y = 0)
+algo_menu.place(x = 170, y = 10)
 algo_menu.current(0)      # by default bubble sort
 
-random_generate = Button(root, text = "Generate", bg = '#2DAE9A', font = ("arial", 12, "italic bold"), 
-                         relief = SUNKEN, activebackground = '#05945B', activeforeground = "white", bd = 5, 
+random_generate = Button(root, text = "Generate", bg = 'skyblue', font = ("arial", 12, "italic bold"), 
+                         relief = SUNKEN, activebackground = 'blue', activeforeground = "white", bd = 5, 
                          width = 10, command = Generate)
-random_generate.place(x = 750, y = 60)
+random_generate.place(x = 750, y = 70)
 
-sizevaluelabel = Label(root, text = "Size : ", font = ("new roman", 12, "italic bold"), bg = "#0E6DA5", 
+sizevaluelabel = Label(root, text = "Size : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
-sizevaluelabel.place(x = 0, y = 60)
+sizevaluelabel.place(x = 20, y = 70)
 
-sizevalue = Scale(root, from_ = 0, to = 30, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+sizevalue = Scale(root, from_ = 5, to = 30, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
-sizevalue.place(x = 120, y = 60)
+sizevalue.place(x = 140, y = 70)
 
-minvaluelabel = Label(root, text = "Min Value : ", font = ("new roman", 12, "italic bold"), bg = "#0E6DA5", 
+minvaluelabel = Label(root, text = "Min Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
-minvaluelabel.place(x = 250, y = 60)
+minvaluelabel.place(x = 260, y = 70)
 
 minvalue = Scale(root, from_ = 0, to = 10, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
-minvalue.place(x = 370, y = 60)
+minvalue.place(x = 380, y = 70)
 
 
-maxvaluelabel = Label(root, text = "Max Value : ", font = ("new roman", 12, "italic bold"), bg = "#0E6DA5", 
+maxvaluelabel = Label(root, text = "Max Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
-maxvaluelabel.place(x = 500, y = 60)
+maxvaluelabel.place(x = 510, y = 70)
 
-maxvalue = Scale(root, from_ = 0, to = 100, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+maxvalue = Scale(root, from_ = 5, to = 100, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
-maxvalue.place(x = 620, y = 60)
+maxvalue.place(x = 630, y = 70)
 
-start = Button(root, text = "Start", bg = '#C45B09', font = ("arial", 12, "italic bold"), 
+start = Button(root, text = "Start", bg = 'lightgreen', font = ("arial", 12, "italic bold"), 
         relief = SUNKEN, activebackground = 'green', activeforeground = "white", bd = 5, width = 10, command = StartAlgorithm)
-start.place(x = 750, y = 0)
+start.place(x = 750, y = 10)
 
-speedlabel = Label(root, text = "Speed : ", font = ("new roman", 12, "italic bold"), bg = "#0E6DA5", 
-                  width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
-speedlabel.place(x = 400, y = 0)
+speedlabel = Label(root, text = "Speed : ", font = ("new roman", 12, "italic bold"), bg = "violet", 
+                  width = 10, fg = "black", height = 2, relief = GROOVE, bd = 3)
+speedlabel.place(x = 415, y = 10)
 
 speedscale = Scale(root, from_ = 0.1, to = 5.0, resolution = 0.2, length = 200, digits = 2, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
-                  relief = GROOVE, bd = 2, width = 10)
-speedscale.place(x = 520, y = 0)
+                  relief = GROOVE, bd = 1, width = 10)
+speedscale.place(x = 535, y = 10)
 
-canvas = Canvas(root, width = 870, height = 450, bg = "black")
+canvas = Canvas(root, width = 870, height = 450, bg = "silver")
 canvas.place(x = 10, y = 130)
 
 root.mainloop()
