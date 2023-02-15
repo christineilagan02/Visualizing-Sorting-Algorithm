@@ -9,6 +9,7 @@ from bubblesort import bubble_sort
 from quicksort import quick_sort
 from mergesort import merge_sort
 from insertionsort import insertion_sort
+from selectionsort import selection_sort
 
 window = Tk()
 window.title('Sorting Algorithm Visualiser')
@@ -55,6 +56,9 @@ def StartAlgorithm():
     elif algo_menu.get() == "Insertion Sort":
         insertion_sort(data, drawData, timeTick)
         
+    elif algo_menu.get() == "Selection Sort":
+        selection_sort(data, drawData, timeTick)
+        
     drawData(data, ['green' for x in range(len(data))])
 
 # This function will set sorting speed
@@ -91,7 +95,7 @@ mainlabel = Label(window, text = "Algorithm : ", font = ("new roman", 16, "itali
 mainlabel.place(x = 20, y = 10)
 
 algo_menu = ttk.Combobox(window, width = 15, font = ("new roman", 19, "italic bold"), textvariable = selected_algorithm, 
-                         values = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort'])
+                         values = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Selection Sort'])
 algo_menu.place(x = 170, y = 10)
 algo_menu.current(0)      # by default bubble sort
 
