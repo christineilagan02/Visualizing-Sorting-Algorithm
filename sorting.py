@@ -9,10 +9,10 @@ from bubblesort import bubble_sort
 from quicksort import quick_sort
 from mergesort import merge_sort
 
-root = Tk()
-root.title('Sorting Algorithm Visualiser')
-root.geometry('900x600+200+80')
-root.config(bg='lightblue')
+window = Tk()
+window.title('Sorting Algorithm Visualiser')
+window.geometry('900x600+200+80')
+window.config(bg='lightblue')
 data = []
 
 def drawData(data, colorArray):
@@ -35,7 +35,7 @@ def drawData(data, colorArray):
         canvas.create_text(x0+2, y0, anchor = SW, text = str(data[i]), font = ("new roman", 10, "italic bold"),
                            fill = "black")
 
-    root.update_idletasks()
+    window.update()
 def StartAlgorithm():
     global data
     timeTick = set_speed()
@@ -55,11 +55,11 @@ def StartAlgorithm():
 # This function will set sorting speed
 def set_speed():
     if speed_menu.get() == 'Slow':
-        return 0.3
+        return 1
     elif speed_menu.get() == 'Medium':
-        return 0.1
+        return 0.5
     else:
-        return 0.001
+        return 0.1
 
 def Generate():
     global data
@@ -81,60 +81,60 @@ selected_algorithm = StringVar()
 speed_name = StringVar()
 # label, buttons, speed scale
 
-mainlabel = Label(root, text = "Algorithm : ", font = ("new roman", 16, "italic bold"), bg = "violet", 
+mainlabel = Label(window, text = "Algorithm : ", font = ("new roman", 16, "italic bold"), bg = "violet", 
                   width = 10, fg = "black", relief = GROOVE, bd = 5)
 mainlabel.place(x = 20, y = 10)
 
-algo_menu = ttk.Combobox(root, width = 15, font = ("new roman", 19, "italic bold"), textvariable = selected_algorithm, 
+algo_menu = ttk.Combobox(window, width = 15, font = ("new roman", 19, "italic bold"), textvariable = selected_algorithm, 
                          values = ['Bubble Sort', 'Merge Sort', 'Quick Sort'])
 algo_menu.place(x = 170, y = 10)
 algo_menu.current(0)      # by default bubble sort
 
-random_generate = Button(root, text = "Generate", bg = 'skyblue', font = ("arial", 12, "italic bold"), 
+random_generate = Button(window, text = "Generate", bg = 'skyblue', font = ("arial", 12, "italic bold"), 
                          relief = SUNKEN, activebackground = 'blue', activeforeground = "white", bd = 5, 
                          width = 10, command = Generate)
 random_generate.place(x = 750, y = 70)
 
-sizevaluelabel = Label(root, text = "Size : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
+sizevaluelabel = Label(window, text = "Size : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
 sizevaluelabel.place(x = 20, y = 70)
 
-sizevalue = Scale(root, from_ = 5, to = 30, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+sizevalue = Scale(window, from_ = 5, to = 30, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
 sizevalue.place(x = 140, y = 70)
 
-minvaluelabel = Label(root, text = "Min Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
+minvaluelabel = Label(window, text = "Min Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
 minvaluelabel.place(x = 260, y = 70)
 
-minvalue = Scale(root, from_ = 0, to = 10, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+minvalue = Scale(window, from_ = 0, to = 10, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
 minvalue.place(x = 380, y = 70)
 
 
-maxvaluelabel = Label(root, text = "Max Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
+maxvaluelabel = Label(window, text = "Max Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
 maxvaluelabel.place(x = 510, y = 70)
 
-maxvalue = Scale(root, from_ = 5, to = 100, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
+maxvalue = Scale(window, from_ = 5, to = 100, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
 maxvalue.place(x = 630, y = 70)
 
-start = Button(root, text = "Start", bg = 'lightgreen', font = ("arial", 12, "italic bold"), 
+start = Button(window, text = "Start", bg = 'lightgreen', font = ("arial", 12, "italic bold"), 
         relief = SUNKEN, activebackground = 'green', activeforeground = "white", bd = 5, width = 10, command = StartAlgorithm)
 start.place(x = 750, y = 10)
 
 # dropdown to select sorting speed 
-speedlabel = Label(root, text = "Sorting Speed: ", font = ("new roman", 16, "italic bold"), bg = "violet", 
-                  width = 13, fg = "black", relief = GROOVE, bd = 5)
-speedlabel.place(x = 430, y = 10)
+speedlabel = Label(window, text = "Speed: ", font = ("new roman", 16, "italic bold"), bg = "violet", 
+                  width = 9, fg = "black", relief = GROOVE, bd = 5)
+speedlabel.place(x = 460, y = 10)
 
-speed_menu = ttk.Combobox(root, width = 7, font = ("new roman", 15, "italic bold"), textvariable = speed_name, 
+speed_menu = ttk.Combobox(window, width = 7, font = ("new roman", 15, "italic bold"), textvariable = speed_name, 
                          values = ['Fast', 'Medium', 'Slow'])
-speed_menu.place(x = 620, y = 10)
+speed_menu.place(x = 600, y = 10)
 speed_menu.current(1)     # by default medium
 
-canvas = Canvas(root, width = 870, height = 450, bg = "silver")
+canvas = Canvas(window, width = 870, height = 450, bg = "silver")
 canvas.place(x = 10, y = 130)
 
-root.mainloop()
+window.mainloop()
