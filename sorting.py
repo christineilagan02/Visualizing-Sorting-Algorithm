@@ -8,6 +8,7 @@ from tkinter import ttk
 
 import random
 import pygame
+from tkinter import messagebox
 
 # algorithm file
 from bubblesort import bubble_sort
@@ -21,6 +22,28 @@ root.title('Sorting Algorithm Visualiser')
 root.geometry('900x600+200+80')
 root.config(bg='lightblue')
 data = []
+
+# Creating object of photoimage class
+# Image should be in the same folder
+# in which script is saved
+image = PhotoImage(file = 'image/sorted logo.png')
+  
+# Setting icon of master window
+root.iconphoto(False, image)
+
+# Creating a photoimage object to use image
+photo = PhotoImage(file = 'image/mark.png')
+
+# Resizing image to fit on button
+photoimage = photo.subsample(6, 6)
+
+def message():
+    messagebox.showinfo("Information", 'Press ENTER to START, Press SHIFT+TAB to GENERATE and Press ESC to CLOSE WINDOW')
+
+# here, image option is used to
+# set image on button
+mark = Button(root, image = photoimage, command = message)
+mark.place(x = 425, y = 10)
 
 def drawData(data, colorArray):
     canvas.delete("all")
@@ -77,6 +100,9 @@ def StartAlgorithm():
     drawData(data, ['green' for x in range(len(data))])
     sound1.play()
     sound.stop()
+    
+# Bind the Enter Key to the window
+root.bind('<Return>', lambda event: StartAlgorithm())
 
 # This function will set sorting speed
 def set_speed():
@@ -101,7 +127,16 @@ def Generate():
         # we will add that speed scaled by appending it 
         data.append(random.randrange(minivalue, maxivalue+1))
     drawData(data, ['#A90042' for x in range(len(data))])
+    
+# Bind the Shift+Tab key with the event
+root.bind('<Shift-Tab>', lambda event: Generate())
 
+# Define an event to close the window
+def close_win(e):
+   root.destroy()
+   
+# Bind the ESC key with the callback function
+root.bind('<Escape>', lambda e: close_win(e))
 
 
 selected_algorithm = StringVar()
@@ -132,11 +167,11 @@ sizevalue.place(x = 140, y = 70)
 
 minvaluelabel = Label(root, text = "Min Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
                   width = 10, fg = "black", height = 2, relief = GROOVE, bd = 5)
-minvaluelabel.place(x = 260, y = 70)
+minvaluelabel.place(x = 265, y = 70)
 
 minvalue = Scale(root, from_ = 0, to = 10, resolution = 1, orient = HORIZONTAL, font = ("arial", 14, "italic bold"), 
                   relief = GROOVE, bd = 2, width = 10)
-minvalue.place(x = 380, y = 70)
+minvalue.place(x = 385, y = 70)
 
 
 maxvaluelabel = Label(root, text = "Max Value : ", font = ("new roman", 12, "italic bold"), bg = "pink", 
@@ -154,11 +189,11 @@ start.place(x = 750, y = 10)
 # dropdown to select sorting speed 
 speedlabel = Label(root, text = "Speed: ", font = ("new roman", 16, "italic bold"), bg = "violet", 
                   width = 9, fg = "black", relief = GROOVE, bd = 5)
-speedlabel.place(x = 460, y = 10)
+speedlabel.place(x = 490, y = 10)
 
 speed_menu = ttk.Combobox(root, width = 7, font = ("new roman", 15, "italic bold"), textvariable = speed_name, 
                          values = ['Fast', 'Medium', 'Slow'])
-speed_menu.place(x = 600, y = 10)
+speed_menu.place(x = 630, y = 10)
 speed_menu.current(1)     # by default medium
 
 canvas = Canvas(root, width = 870, height = 450, bg = "silver")
